@@ -6,9 +6,18 @@ app = Flask(__name__)
 
 socketio = SocketIO(app, cors_allowed_origins="*")
 
+
+
+@socketio.on("message")
+def send_message(message):
+    send(message,broadcast=True)
+
 @app.route("/")
 def chat_room():
     return render_template("chat.html")
 
+
+
+
 if __name__ == "__main__":
-    app.run()
+    app.run(debug=True)
