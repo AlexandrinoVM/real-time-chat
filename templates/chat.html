@@ -17,26 +17,40 @@
         <div class="message_input">
             <input type="text" placeholder="send a message" id="message">
             <input type="button" id="message-button" value="enviar">
+            
         </div>
     </div>
     <script defer>
         const socket = io()
-        let message = document.querySelector('#message-box')
+        let message = document.getElementById('Wmessage-box')
 
         socket.on("connect",()=>{
             console.log('connected')
         })
         let button = document.getElementById('message-button')
-        function send(){
+        
+        let get_message = document.getElementById('message')
+        
 
-            let get_message = document.getElementById('message').value
+        get_message.addEventListener('keypress', (e) =>{
+            if(e.which === 13){
+                socket.emit("message",get_message.value)
+                get_message.value =""
+            }
+        })
+            
+        let message_b = document.getElementById('message-box')
+        socket.on('message',(message)=>{
             let span = document.createElement('p')
-            span.innerText = get_message
-            let message_box =document.getElementById('message-box')
-            message_box.appendChild(span)
-
-        }
-        button.addEventListener('click',send)
+            span.innerText = message
+            message_b.appendChild(span)
+            console.log(span)
+        })
+        
+        button.addEventListener('click',() =>{
+            socket.emit("message",get_message.value)
+            get_message.value =""
+        })
     </script>
 </body>
 </html>
