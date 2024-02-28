@@ -12,7 +12,7 @@
     <div id="container">
         <h1>chat room</h1>
         <div id="message-box">
-            <p></p>
+           
         </div>
         <div class="message_input">
             <input type="text" placeholder="send a message" id="message">
@@ -26,7 +26,17 @@
         socket.on("connect",()=>{
             console.log('connected')
         })
+        let button = document.getElementById('message-button')
+        function send(){
 
+            let get_message = document.getElementById('message').value
+            let span = document.createElement('p')
+            span.innerText = get_message
+            let message_box =document.getElementById('message-box')
+            message_box.appendChild(span)
+
+        }
+        button.addEventListener('click',send)
     </script>
 </body>
 </html>
