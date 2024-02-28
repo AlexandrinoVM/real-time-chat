@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>chat</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"
+        integrity="sha512-q/dWJ3kcmjBLU4Qc47E4A9kTB4m3wuTY7vkFJDTZKjTs8jhyGQnaUrxa0Ytd0ssMZhbNua9hE+E7Qv1j+DyZwA=="
+        crossorigin="anonymous"></script>
+</head>
+<body>
+    <div id="container">
+        <h1>chat room</h1>
+        <div id="message-box">
+            <p></p>
+        </div>
+        <div class="message_input">
+            <input type="text" placeholder="send a message" id="message">
+            <input type="button" id="message-button" value="enviar">
+        </div>
+    </div>
+    <script defer>
+        const socket = io()
+        let message = document.querySelector('#message-box')
+
+        socket.on("connect",()=>{
+            console.log('connected')
+        })
+
+    </script>
+</body>
+</html>
