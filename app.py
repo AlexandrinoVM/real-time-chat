@@ -1,16 +1,27 @@
+import socket
 from flask import Flask,render_template
 from flask_socketio import SocketIO, send
 
 
 app = Flask(__name__)
 
+
 socketio = SocketIO(app, cors_allowed_origins="*")
 
+temp = ''
+
+
+socketio.on('user')
+def get_user(user):
+    send(user,broadcast=True)
 
 
 @socketio.on("message")
-def send_message(message):
+def message(message):
     send(message,broadcast=True)
+   
+
+
 
 @app.route("/")
 def chat_room():

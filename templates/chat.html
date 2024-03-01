@@ -4,23 +4,31 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>chat</title>
+    <link rel="stylesheet" href="../static/styles/style.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"
-        integrity="sha512-q/dWJ3kcmjBLU4Qc47E4A9kTB4m3wuTY7vkFJDTZKjTs8jhyGQnaUrxa0Ytd0ssMZhbNua9hE+E7Qv1j+DyZwA=="
-        crossorigin="anonymous"></script>
+    integrity="sha512-q/dWJ3kcmjBLU4Qc47E4A9kTB4m3wuTY7vkFJDTZKjTs8jhyGQnaUrxa0Ytd0ssMZhbNua9hE+E7Qv1j+DyZwA=="
+    crossorigin="anonymous"></script>
 </head>
 <body>
     <div id="container">
         <h1>chat room</h1>
+        <div id="user">
+            <input type="text" placeholder="type your name" id="user-name">
+            <input type="button" id="user-button" value="comfirm">
+        </div>
         <div id="message-box">
            
         </div>
-        <div class="message_input">
+        <div id="message_input">
             <input type="text" placeholder="send a message" id="message">
             <input type="button" id="message-button" value="enviar">
             
         </div>
     </div>
     <script defer>
+        let userbtn = document.getElementById('user-button')
+        
+       
         const socket = io()
         let message = document.getElementById('Wmessage-box')
 
@@ -31,25 +39,45 @@
         
         let get_message = document.getElementById('message')
         
-
+        let get_user = document.getElementById('user-name')
+        
         get_message.addEventListener('keypress', (e) =>{
             if(e.which === 13){
                 socket.emit("message",get_message.value)
                 get_message.value =""
+                
             }
         })
-            
+
+        user_name=''
+        
+
+
         let message_b = document.getElementById('message-box')
+        
+
         socket.on('message',(message)=>{
-            let span = document.createElement('p')
-            span.innerText = message
-            message_b.appendChild(span)
-            console.log(span)
+            if (message == ''){
+                return
+
+            }
+                
+                let span = document.createElement('p')
+                span.innerText = message 
+                message_b.appendChild(span)
+            
         })
         
         button.addEventListener('click',() =>{
-            socket.emit("message",get_message.value)
+            aux = get_user.value +":"+ get_message.value
+            socket.emit("message",aux)
             get_message.value =""
+           
+        })
+
+        userbtn.addEventListener('click',() =>{
+            socket.emit("user",get_user.value)
+           
         })
     </script>
 </body>
