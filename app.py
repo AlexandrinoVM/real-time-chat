@@ -8,12 +8,7 @@ app = Flask(__name__)
 
 socketio = SocketIO(app, cors_allowed_origins="*")
 
-temp = ''
 
-
-socketio.on('user')
-def get_user(user):
-    send(user,broadcast=True)
 
 
 @socketio.on("message")

@@ -5,12 +5,33 @@
     
 }
 #container{
+    text-align: center;
     color: white;
     height: 100vh;
     background-image: url(../img/background.webp);
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
+    
+}
+#user{
+    height: 75px;
+}
+#user-name{
+    height: 25px;
+    border: 1px solid black;
+    border-radius: 9px;
+    text-decoration: none;
+    text-align: center;
+    
+}
+
+#user-button{
+    border: 1px solid black;
+    width: 75px;
+    height: 20px;
+    align-items: center;
+    border-radius: 9px;
     
 }
 
@@ -20,13 +41,13 @@
     width: 350px;
     height: 430px;
     margin: auto;
-    margin-top: 135px;
+    margin-top: 100px;
     overflow-y: auto;
     border: 1px solid rgb(0, 0, 0);
     padding: 15px;
     border-radius: 9px;
     background-color: #354E56;
-    gap: 1em;
+    gap: 8px;
     align-items: center;
 }
 #message-box p{
@@ -40,7 +61,7 @@
 #message-input{
     position: absolute;
     left: 685px;
-    top: 620px;
+    top: 600px;
     gap: 10%;
 }
 

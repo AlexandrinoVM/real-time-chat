@@ -11,9 +11,13 @@
 </head>
 <body>
     <div id="container">
+        
+      
         <h1>chat room</h1>
         <div id="user">
             <input type="text" placeholder="type your name" id="user-name">
+            <span style="display: none;" id="invalid-user">!the user cannot be empty!</span>
+            <br>
             <input type="button" id="user-button" value="comfirm">
         </div>
         <div id="message-box">
@@ -46,7 +50,8 @@
         
         get_message.addEventListener('keypress', (e) =>{
             if(e.which === 13){
-                socket.emit("message",get_message.value)
+                aux = get_user.value +":"+ get_message.value
+                socket.emit("message",aux)
                 get_message.value =""
                 
             }
@@ -77,11 +82,19 @@
             get_message.value =""
            
         })
-
-        userbtn.addEventListener('click',() =>{
-            socket.emit("user",get_user.value)
-           
+        userbtn.addEventListener('click',()=>{
+            let span = document.getElementById('invalid-user')
+            if(get_user.value == ''){
+                span.style.display = 'block'
+            }
+            else{
+                userbtn.style.display = 'none'
+                get_user.style.display = 'none'
+                get_message.style.top = '575px'
+            }
+            
         })
+        
     </script>
 </body>
 </html>
